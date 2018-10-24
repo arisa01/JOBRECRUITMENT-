@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <style>
+            body{
+                background-image: url(Applicant.jpg);
+                text-align: center;
+                text-decoration-color: whitesmoke;
+            }
+            
+        </style>
+        <h:form>
+          
+            <h:outputLabel>EMAIL:</h:outputLabel>
+            <h:inputText id="email" value="#{Applicant.email}" ></h:inputText>
+            <br/>
+            <h:outputLabel>PASSWORD:</h:outputLabel>
+            <h:inputSecret id="pass" value="#{Applicant.password}" ></h:inputSecret>
+            <br/>
+            <h:outputLabel>CONFIRM PASSWORD:</h:outputLabel>
+            <h:inputSecret id="password" value="#{Applicant.password}" ></h:inputSecret>
+            <br/>
+            <h:outputLabel>AGE:</h:outputLabel>
+            <h:inputText id="age" value="#{Applicant.age}"></h:inputText>
+            
+            <input type="radio" name="gender" value="male"/> Male<br/>
+            <input type="radio" name="gender" value="female"/> Female<br/>
+            <input type="radio" name="gender" value="other"/> Other
+
+            <br/>
+            <h:selectOneRadio value="#{Applicant.gender}">
+                    <f:selectItem itemValue="#{Applicant.saveUser()}" itemLabel="MALE" />
+                    <f:selectItem itemValue="Green" itemLabel="Color1 - Green" />
+                    <f:selectItem itemValue="Blue" itemLabel="Color1 - Blue" />
+            </h:selectOneRadio>
+            <br/>
+            <h:outputLabel>ACHIEVEMENTS:</h:outputLabel>
+            <h:inputText id="achieve" value="#{Applicant.achievements}"></h:inputText>
+            <br/>
+            <h:outputLabel>EDUCATION:</h:outputLabel>
+            <h:inputText id="edu" value="#{Applicant.education}"></h:inputText>
+            <br/>
+            <h:commandButton id="apply" value="APPLY" action="#{Applicant.saveUser()}"></h:commandButton>
+            
+            <h:commandButton id="save" value="SAVE" action="#{Applicant.saveUser()}"></h:commandButton>
+        </h:form>
+    </body>
+</html>

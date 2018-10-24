@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>QUESTIONS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <style>
+            body{
+                background-image: url(recruiter.jpg);
+                background-repeat: no-repeat;
+                text-decoration-color: whitesmoke;
+               
+            }
+        </style>
+        <h:form>
+            <h:outputLabel>AGE:</h:outputLabel>
+            <h:inputText id="age" value="#{Validate.age}"></h:inputText>
+            <br/>
+            <input type="radio" name="gender" value="male"/> Male<br/>
+            <input type="radio" name="gender" value="female"/> Female<br/>
+            <input type="radio" name="gender" value="other"/> Other
+            <br/>
+            <h:outputLabel>ACHIEVEMENTS:</h:outputLabel>
+            <h:inputText id="achieve" value="#{Validate.achievements}"></h:inputText>
+            <br/>
+            <h:outputLabel>EDUCATION:</h:outputLabel>
+            <h:inputText id="edu" value="#{Validate.education}"></h:inputText>
+            <br/>
+            <h:commandButton id="apply" value="APPLY" action="#{Validate.saveUser()}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
