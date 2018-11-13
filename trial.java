@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,21 +15,20 @@ import static org.jboss.logging.NDC.clear;
 
 /**
  *
- * @author 101484
+ * @author User
  */
-@ManagedBean(name = "Validate")
+@ManagedBean(name = "Trial")
 @RequestScoped
-public class Prerequisite extends Recruitment{
-    boolean results;
+public class trial extends Recruitment{
     String email;
     String password;
-    //getters and setters
-    public boolean isResults() {
-        return results;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setResults(boolean results) {
-        this.results = results;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -38,21 +38,11 @@ public class Prerequisite extends Recruitment{
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-     DBCONNECT db = new DBCONNECT();
+    DBCONNECT db = new DBCONNECT();
     Connection mycon = db.myConnect();
     Hasher jk = new Hasher();
-    
-    //login validation
-    private String Login() throws SQLException{
+     //login validation
+    public String login() throws SQLException{
      Statement statement = mycon.createStatement();
     String SQL = "SELECT Email,Password FROM prerequisite WHERE Email = '" +getEmail()+
             "' AND Password = '" + getPassword() + "';";
@@ -61,32 +51,34 @@ public class Prerequisite extends Recruitment{
         if(getEmail().equals(resultset.getString("Email")) && getPassword().equals(resultset.getString("Password"))){
             return "index";
         }
+                return null;
     }
         return null;
     }
+   
     
- 
-    
-    public String addUser()throws SQLException{
-        Statement e = null ;
+    public String saveUser()throws SQLException{
+       
+        Statement s = null ;
+        
         if(mycon!=null){
          System.out.println(mycon);
-         e = mycon.createStatement();
+         s = mycon.createStatement();
          
                     String sql = "INSERT INTO prerequisite "
-                            + "(Email,Password,Age,Gender,Achievements,Education,"
-                            + "Result) "
+                            + "(Email,Password,Age,Gender,Achievements,"
+                            + "Education) "
                             + "VALUES ('" + getEmail() + "','"
                             + jk.encryptPassword(getPassword()) + "','"
-                            + getAge() + "','"
+                            + getAge()+ "'" + ",'"
                             + getGender() + "','"
                             + getAchievements()+ "','"    
-                            + isResults()+ "') ";
+                            + getEducation()+ "') ";
                     
-                    e.execute(sql);
+                    s.execute(sql);
                     clear();
                     
      }
         return null;
-    }
+}
 }

@@ -1,3 +1,4 @@
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -5,6 +6,7 @@ import java.sql.Statement;
 //bean imports
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.swing.JOptionPane;
 import static org.jboss.logging.NDC.clear;
 
 /*
@@ -22,11 +24,11 @@ import static org.jboss.logging.NDC.clear;
 public class Applicant extends Recruitment {
     String email;
     String password;
-    
+ Component rootPane;
     //DB Connection
      DBCONNECT db = new DBCONNECT();
     Connection mycon = db.myConnect();
-    Hasher jk = new Hasher();
+    Hasher jk = new Hasher();//password hashing class calling
     //getters and setters
 
     public String getEmail() {
@@ -55,9 +57,11 @@ public class Applicant extends Recruitment {
         if(getEmail().equals(resultset.getString("Email")) && getPassword().equals(resultset.getString("Password"))){
             return "index";
         }
+                return null;
     }
         return null;
     }
+    
     
     //checking if applicant has met requirements
     public String apply() throws SQLException{
@@ -66,11 +70,17 @@ public class Applicant extends Recruitment {
             "' AND Achievements = '" + getAchievements() + "';" + "' AND Education = '" + getEducation();
          
         ResultSet resultset = statement.executeQuery(SQL);
+       boolean recordAdded = true;
     while (resultset.next()){
-        if(getEmail().equals(resultset.getString("Email")) && getPassword().equals(resultset.getString("Password"))){
-            return "index";
-        }
-       
+        
+        
+       recordAdded = true;
+    }
+    if( recordAdded ){
+            
+      JOptionPane.showMessageDialog(rootPane, "Record added");
+    }else{
+       JOptionPane.showMessageDialog(rootPane, "Record already exists");
     }
         return null;
         
@@ -100,3 +110,5 @@ public class Applicant extends Recruitment {
         return null;
     }
 }
+
+  
